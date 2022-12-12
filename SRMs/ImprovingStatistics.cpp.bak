@@ -1,0 +1,96 @@
+// BEGIN CUT HERE
+// PROBLEM STATEMENT
+// 
+Several years ago I was playing Spider Solitaire on my computer all the time. Sometimes I won, sometimes I lost. Then I stopped playing Spider Solitaire 
+and started participating in programming competitions. After a few years I happened to start my old solitaire program again. I was pleased to discover
+that with the skill I gained during the years I am now able to win each and every game of Spider Solitaire.
+However, the program still remembers some of my previous games and thus the statistics don't necessarily reflect my current perfect skills.
+
+
+
+The program displays the statistics in the following way:
+Games played: X
+Games won: Y (Z %)
+
+
+
+The number Z is the percentage of games I won, rounded down to the nearest integer. For example, if X=53 and Y=47, then Z=88. 
+(The value Y/X is roughly equal to 0.8868, which means that I won roughly 88.68% of the games I played. 88.68% rounded down to an integer is 88%.)
+
+
+
+You will be given two ints played and won - the number of games I played so far, and the number
+of games I won so far. Return the smallest positive integer G such that if I now win G games in a row the displayed value of Z will increase.
+If this is impossible, return -1 instead.
+
+
+DEFINITION
+Class:ImprovingStatistics
+Method:howManyGames
+Parameters:int, int
+Returns:int
+Method signature:int howManyGames(int played, int won)
+
+
+NOTES
+-You may assume that the return value will always be less than 2,000,000,000.
+
+
+CONSTRAINTS
+-played will be between 1 and 1,000,000,000, inclusive.
+-won will be between 0 and played, inclusive.
+
+
+EXAMPLES
+
+0)
+10
+8
+
+Returns: 1
+
+So far I won 8 games out of 10, and thus the displayed success percentage is 80%.
+After I win the next game the percentage will increase to 81%.
+
+1)
+100
+80
+
+Returns: 6
+
+Again, the currently displayed value is 80%. However, now I need to win at least 6 more games to bring it to 81%.
+
+2)
+47
+47
+
+Returns: -1
+
+Nothing left to improve.
+
+3)
+99000
+0
+
+Returns: 1000
+
+
+
+4)
+1000000000
+470000000
+
+Returns: 19230770
+
+
+
+// END CUT HERE
+#line 89 "ImprovingStatistics.cpp"
+#include <string>
+#include <vector>
+class ImprovingStatistics {
+	public:
+	int howManyGames(int played, int won) {
+		
+	}
+};

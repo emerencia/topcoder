@@ -1,0 +1,39 @@
+<style type="text/css"> pre {  white-space: pre-wrap;       white-space: -moz-pre-wrap;   white-space: -pre-wrap;  white-space: -o-pre-wrap;    word-wrap: break-word;  } </style>
+<html><body bgcolor="#ffffff" text="#000000"><table><tr><td colspan="2"><h3>Problem Statement</h3></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><p>
+	The celebrated general Archibald Waving took charge of the fourth army in the occidental front. 
+	After losing the first three armies, Waving has become obsessed with effective synchronization of the army. 
+	Whenever Waving needs to write the time at which military operations will be performed, he writes only the 
+	minute part of the time (the time also has an hour part, which Waving does not write down). This 
+	strategy prevents the enemy from figuring out the exact times of the operations even if he obtains the 
+	schedule written by Archibald Waving. Of course, Waving's soldiers are very smart, so they are able to 
+	reconstruct the entire schedule from the minute parts alone.
+</p>
+<br></br>
+<p>
+	A particular time can be written as AB:CD, where AB represents the hour part, and CD represents the minute part. 
+	The schedule is a list of times within the same day, where time can lie in the range from 00:00 to 23:59. 
+	Moreover, the times appear in chronological order, i.e. the time of the operation performed earlier 
+	should be listed before the time of the operation performed later during the day. Also, no two 
+	operations can be performed at the same time. 
+</p>
+<br></br>
+<p>
+	Waving wants to know if the enemy will be able to figure out anything from the schedule he has written.
+	You are given a vector &lt;int&gt; <b>minuteValues</b> representing minute parts of the times as written by Waving. 
+	An hour assignment can be represented by a vector &lt;int&gt; whose <i>i</i>-th element is the hour part 
+	corresponding to <b>minuteValues</b>[<i>i</i>]. The assignment is considered valid if and only if 
+	the schedule obtained from the assignment follows the rules mentioned above. Help Waving by 
+	returning the <b>K</b>-th (1-indexed) lexicographically smallest valid hour assignment. If there are 
+	less than <b>K</b> valid hour assignments, return a vector &lt;int&gt; containing single element -1 instead.
+</p>
+</td></tr><tr><td colspan="2"><h3>Definition</h3></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td>Class:</td><td>WeirdTimes</td></tr><tr><td>Method:</td><td>hourValues</td></tr><tr><td>Parameters:</td><td>vector &lt;int&gt;, int</td></tr><tr><td>Returns:</td><td>vector &lt;int&gt;</td></tr><tr><td>Method signature:</td><td>vector &lt;int&gt; hourValues(vector &lt;int&gt; minuteValues, int K)</td></tr><tr><td colspan="2">(be sure your method is public)</td></tr></table></td></tr><tr><td colspan="2"><h3>Limits</h3></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td>Time limit (s):</td><td>2.000</td></tr><tr><td>Memory limit (MB):</td><td>64</td></tr></table></td></tr><tr><td colspan="2"><h3>Notes</h3></td></tr><tr><td align="center" valign="top">-</td><td>vector &lt;int&gt; <i>X</i> is lexicographically smaller than vector &lt;int&gt; <i>Y</i> of the same size iff there exists an index i such that <i>X</i>[j] = <i>Y</i>[j], j &lt; i, and <i>X</i>[i] &lt; <i>Y</i>[i].</td></tr><tr><td colspan="2"><h3>Constraints</h3></td></tr><tr><td align="center" valign="top">-</td><td><b>minuteValues</b> will contain between 1 and 50 elements, inclusive.</td></tr><tr><td align="center" valign="top">-</td><td>Each element of <b>minuteValues</b> will be between 0 and 59, inclusive.</td></tr><tr><td align="center" valign="top">-</td><td><b>K</b> will be between 1 and 1,000,000,000, inclusive.</td></tr><tr><td colspan="2"><h3>Examples</h3></td></tr><tr><td align="center" nowrap="true">0)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>{22, 11, 33}</pre></td></tr><tr><td><pre>3</pre></td></tr></table></td></tr><tr><td><pre>Returns: {0, 1, 3 }</pre></td></tr><tr><td><table><tr><td colspan="2">The three lexicographically smallest valid hour assignments and the corresponding schedules obtained from them are:
+<pre>
+{0, 1, 1} ---> {00:22, 01:11, 01:33}
+{0, 1, 2} ---> {00:22, 01:11, 02:33}
+{0, 1, 3} ---> {00:22, 01:11, 03:33}
+</pre></td></tr></table></td></tr></table></td></tr><tr><td align="center" nowrap="true">1)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>{10}</pre></td></tr><tr><td><pre>2</pre></td></tr></table></td></tr><tr><td><pre>Returns: {1 }</pre></td></tr><tr><td><table><tr><td colspan="2">All possible schedules in lexicographically sorted order are
+<pre>
+00:10, 01:10, 02:10, 03:10, 04:10, 05:10, 06:10, 07:10,
+08:10, 09:10, 10:10, 11:10, 12:10, 13:10, 14:10, 15:10, 
+16:10, 17:10, 18:10, 19:10, 20:10, 21:10, 22:10, 23:10.
+</pre></td></tr></table></td></tr></table></td></tr><tr><td align="center" nowrap="true">2)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>{2, 1}</pre></td></tr><tr><td><pre>20</pre></td></tr></table></td></tr><tr><td><pre>Returns: {0, 20 }</pre></td></tr><tr><td></td></tr></table></td></tr><tr><td align="center" nowrap="true">3)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>{1, 2}</pre></td></tr><tr><td><pre>20</pre></td></tr></table></td></tr><tr><td><pre>Returns: {0, 19 }</pre></td></tr><tr><td></td></tr></table></td></tr><tr><td align="center" nowrap="true">4)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>{25, 24, 23, 22, 21, 20, 19, 18, 17, 16, 15, 15, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1}</pre></td></tr><tr><td><pre>1</pre></td></tr></table></td></tr><tr><td><pre>Returns: {-1 }</pre></td></tr><tr><td><table><tr><td colspan="2">In the list of minute parts, each next element is less than or equal to the previous one. Operations must follow in chronological order and no two operations can be performed at the same time, so no two listed operations can happen within the same hour. There are 25 elements in the list, but a single day consists of just 24 hours, therefore there are no valid hour assignments.</td></tr></table></td></tr></table></td></tr><tr><td align="center" nowrap="true">5)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>{45, 12, 0, 3, 2, 7, 4, 9, 23, 6, 17, 33}</pre></td></tr><tr><td><pre>12345</pre></td></tr></table></td></tr><tr><td><pre>Returns: {0, 1, 2, 2, 3, 3, 4, 5, 12, 13, 18, 18 }</pre></td></tr><tr><td></td></tr></table></td></tr><tr><td align="center" nowrap="true">6)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>{43, 58}</pre></td></tr><tr><td><pre>318</pre></td></tr></table></td></tr><tr><td><pre>Returns: {-1 }</pre></td></tr><tr><td><table><tr><td colspan="2"></td></tr></table></td></tr></table></td></tr></table><p>This problem statement is the exclusive and proprietary property of TopCoder, Inc.  Any unauthorized use or reproduction of this information without the prior written consent of TopCoder, Inc. is strictly prohibited.  (c)2003, TopCoder, Inc.  All rights reserved.  </p></body></html>

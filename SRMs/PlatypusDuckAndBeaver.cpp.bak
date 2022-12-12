@@ -1,0 +1,33 @@
+#include <string>
+#include <iostream>
+#include <sstream>
+#include <algorithm>
+#include <vector>
+#include <map>
+#include <queue>
+#include <cmath>
+#include <utility>
+using namespace std;
+
+class PlatypusDuckAndBeaver {
+	public:
+	int minimumAnimals(int webbedFeet, int duckBills, int beaverTails) {
+		// duck has 2 webbed feet one bill
+		// beaver has 1 tail 4 webbed feet
+		// plat has 4 webbed feet, duck bill beaver tail
+		for (int d=0;d<=duckBills;d++) {
+		  for (int b=0;b<=beaverTails;b++) {
+		    for (int p=0;p<=duckBills;p++) {
+		      if (webbedFeet == 2*d+4*b+4*p && duckBills == d+p && beaverTails==b+p) return d+b+p;
+		    }
+		  }
+		}
+		return -1;
+	}
+};
+
+
+// Powered by FileEdit
+
+
+// Powered by FileEdit

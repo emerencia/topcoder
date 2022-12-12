@@ -1,0 +1,105 @@
+#include <vector>
+#include <iostream>
+#include <algorithm>
+#include <string>
+#include <cstring>
+#include <sstream>
+#include <utility>
+using namespace std;
+
+typedef pair<int,int> PII;
+
+const int kMod = 1e9+7;
+
+long long dp[301][301];
+
+class WolfInZooDivTwo {
+ public:
+  vector<int> tovector(const vector<string>& a) {
+    vector<int> r;
+    string s;
+    for (int i=0;i<a.size();i++)
+      s+=a[i];
+    stringstream b(s);
+    while (!b.eof()) {
+      int c;
+      b >> c;
+      r.push_back(c+1);
+    }
+    return r;
+  }
+  int count(int N, vector<string> L, vector<string> R) {
+    vector<int> l = tovector(L);
+    vector<int> r = tovector(R);
+    int M = l.size();
+    if (M != r.size()) cout << "Ms not equal: " << M << " " << r.size() << endl;
+    vector<PII> intervals;
+    for (int i=0;i<M;i++)
+      intervals.push_back(PII(l[i],r[i]));
+    sort(intervals.begin(),intervals.end());
+    memset(dp,0,sizeof(dp));
+    dp[0][0] = 1;
+    for (int n=1;n<=N;n++)
+      for (int k=0;k<n;k++) {
+        dp[n][n] = (dp[n][n]+dp[n-1][k])%kMod;
+        bool f = false;
+        for (int i=0;i<intervals.size();i++) {
+          if (intervals[i].second != n) continue;
+          if (intervals[i].first <= k) continue;
+          f = true;
+          break;
+        }
+        if (!f)
+          dp[n][k] = (dp[n][k]+dp[n-1][k])%kMod;
+      }
+    long long re = 0;
+    for (int i=0;i<301;i++)
+      re = (re+dp[N][i])%kMod;
+    return re;
+  }
+};
+
+int idx = 0;
+
+void print_result(int expected, int received) {
+  if (expected == received)
+    cout << "TEST " << idx << " PASSED" << endl;
+  else {
+    cout << "TEST " << idx << " FAILED" << endl;
+    cout << "  expected: " << expected << endl;
+    cout << "  received: " << received << endl;
+  }
+  idx++;
+}
+
+int main() {
+  WolfInZooDivTwo a;
+  vector<string> b;
+  b.push_back("0 1");
+  vector<string> c;
+  c.push_back("2 4");
+  print_result(27,a.count(5,b,c));
+  b.clear(); c.clear();
+  b.push_back("0 4 2 7");
+  c.push_back("3 9 5 9");
+  print_result(798,a.count(10,b,c));
+  b.clear(); c.clear();
+  b.push_back("0 2 2 7 10 1");
+  b.push_back("3 16 22 30 33 38");
+  b.push_back(" 42 44 49 51 57 60 62");
+  b.push_back(" 65 69 72 74 77 7");
+  b.push_back("8 81 84 88 91 93 96");
+  c.push_back("41 5 13 22 12 13 ");
+  c.push_back("33 41 80 47 40 ");
+  c.push_back("4");
+  c.push_back("8 96 57 66 ");
+  c.push_back("80 60 71 79");
+  c.push_back(" 70 77 ");
+  c.push_back("99");
+  c.push_back(" 83 85 93 88 89 97 97 98");
+  print_result(250671525,a.count(100,b,c));
+  b.clear(); c.clear();
+  b.push_back("1");
+  c.push_back("2");
+  print_result(6,a.count(3,b,c));
+}

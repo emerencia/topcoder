@@ -1,0 +1,69 @@
+#include <vector>
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+class PrimalUnlicensedCreatures {
+ public:
+  int maxWins(int initialLevel, vector<int> grezPower) {
+    sort(grezPower.begin(),grezPower.end());
+    int c = 0;
+    int p = initialLevel;
+    for (int i=0;i<grezPower.size();i++) {
+      if (p <= grezPower[i]) return c;
+      c++;
+      p+= grezPower[i]/2;
+    }
+    return c;
+  }
+};
+
+int idx = 0;
+
+void print_result(int expected,int received) {
+  if (expected == received)
+    cout << "TEST " << idx << " PASSED" << endl;
+  else {
+    cout << "TEST " << idx << " FAILED" << endl;
+    cout << "  expected: " << expected << endl;
+    cout << "  received: " << received << endl;
+  }
+  idx++;
+}
+
+int main() {
+  PrimalUnlicensedCreatures a;
+  vector<int> b;
+  b.push_back(10);
+  b.push_back(20);
+  b.push_back(30);
+  print_result(3,a.maxWins(31,b));
+  b.clear();
+  b.push_back(24);
+  b.push_back(5);
+  b.push_back(6);
+  b.push_back(38);
+  print_result(3,a.maxWins(20,b));
+  b.clear();
+  b.push_back(3);
+  b.push_back(3);
+  b.push_back(3);
+  b.push_back(3);
+  b.push_back(3);
+  b.push_back(1);
+  b.push_back(25);
+  print_result(6,a.maxWins(20,b));
+  b.clear();
+  b.push_back(3);
+  b.push_back(13);
+  b.push_back(6);
+  b.push_back(4);
+  b.push_back(9);
+  print_result(5,a.maxWins(4,b));
+  b.clear();
+  b.push_back(7);
+  b.push_back(8);
+  b.push_back(9);
+  b.push_back(10);
+  print_result(0,a.maxWins(7,b));
+}

@@ -1,0 +1,23 @@
+<html><body bgcolor="#ffffff" text="#000000"><table><tr><td colspan="2"><h3>Problem Statement</h3></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td>Manao has a rectangular board divided into <b>n</b> times <b>m</b> cells.
+The rows of the board are numbered from 1 to <b>n</b> and the columns are numbered from 1 to <b>m</b>.
+The cell in row i, column j is referred to as (i, j).
+Each cell contains an uppercase letter of the English alphabet.
+<br></br><br></br>
+Having such a board, Manao likes to traverse it.
+The traversal always starts in the cell (1, 1).
+In each step of the traversal Manao moves either one cell down or one cell to the right.
+That is, from any cell (x, y) Manao will move either to (x+1, y) or to (x, y+1).
+The traversal always ends in the cell (<b>n</b>, <b>m</b>).
+During the traversal Manao records the letters in the visited cells (including the first and the last cell).
+The obtained string is called a string path for the given board.
+<br></br><br></br>
+You are given the ints <b>n</b> and <b>m</b>, and two distinct strings <b>A</b> and <b>B</b>.
+Manao claims that he performed two different traversals of his <b>n</b> x <b>m</b> board and obtained the string paths <b>A</b> and <b>B</b>.
+Compute the number of different boards for which this is possible.
+Return this number modulo 1,000,000,009.
+</td></tr><tr><td colspan="2"><h3>Definition</h3></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td>Class:</td><td>StringPath</td></tr><tr><td>Method:</td><td>countBoards</td></tr><tr><td>Parameters:</td><td>int, int, string, string</td></tr><tr><td>Returns:</td><td>int</td></tr><tr><td>Method signature:</td><td>int countBoards(int n, int m, string A, string B)</td></tr><tr><td colspan="2">(be sure your method is public)</td></tr></table></td></tr><tr><td colspan="2"><h3>Limits</h3></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td>Time limit (s):</td><td>2.000</td></tr><tr><td>Memory limit (MB):</td><td>64</td></tr></table></td></tr><tr><td colspan="2"><h3>Constraints</h3></td></tr><tr><td align="center" valign="top">-</td><td><b>n</b> will be between 1 and 8, inclusive.</td></tr><tr><td align="center" valign="top">-</td><td><b>m</b> will be between 1 and 8, inclusive.</td></tr><tr><td align="center" valign="top">-</td><td><b>A</b> and <b>B</b> will be exactly <b>n</b>+<b>m</b>-1 characters long.</td></tr><tr><td align="center" valign="top">-</td><td><b>A</b> and <b>B</b> will consist of uppercase letters ('A'-'Z') only.</td></tr><tr><td align="center" valign="top">-</td><td><b>A</b> and <b>B</b> will be distinct.</td></tr><tr><td colspan="2"><h3>Examples</h3></td></tr><tr><td align="center" nowrap="true">0)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>2</pre></td></tr><tr><td><pre>2</pre></td></tr><tr><td><pre>&quot;ABC&quot;</pre></td></tr><tr><td><pre>&quot;ADC&quot;</pre></td></tr></table></td></tr><tr><td><pre>Returns: 2</pre></td></tr><tr><td><table><tr><td colspan="2">The two possible boards are:
+<br></br>
+<pre>
+AB  AD
+DC  BC
+</pre></td></tr></table></td></tr></table></td></tr><tr><td align="center" nowrap="true">1)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>2</pre></td></tr><tr><td><pre>2</pre></td></tr><tr><td><pre>&quot;ABC&quot;</pre></td></tr><tr><td><pre>&quot;ABD&quot;</pre></td></tr></table></td></tr><tr><td><pre>Returns: 0</pre></td></tr><tr><td><table><tr><td colspan="2">It is impossible for two string paths to have a different last letter.</td></tr></table></td></tr></table></td></tr><tr><td align="center" nowrap="true">2)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>3</pre></td></tr><tr><td><pre>4</pre></td></tr><tr><td><pre>&quot;ABCDDE&quot;</pre></td></tr><tr><td><pre>&quot;ACCBDE&quot;</pre></td></tr></table></td></tr><tr><td><pre>Returns: 1899302</pre></td></tr><tr><td><table><tr><td colspan="2"></td></tr></table></td></tr></table></td></tr><tr><td align="center" nowrap="true">3)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>8</pre></td></tr><tr><td><pre>8</pre></td></tr><tr><td><pre>&quot;ZZZZZZZZZZZZZZZ&quot;</pre></td></tr><tr><td><pre>&quot;ZABCDEFGHIJKLMZ&quot;</pre></td></tr></table></td></tr><tr><td><pre>Returns: 120390576</pre></td></tr><tr><td><table><tr><td colspan="2"></td></tr></table></td></tr></table></td></tr></table><p>This problem statement is the exclusive and proprietary property of TopCoder, Inc.  Any unauthorized use or reproduction of this information without the prior written consent of TopCoder, Inc. is strictly prohibited.  (c)2003, TopCoder, Inc.  All rights reserved.  </p></body></html>

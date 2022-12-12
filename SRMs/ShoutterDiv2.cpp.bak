@@ -1,0 +1,151 @@
+#include <vector>
+#include <iostream>
+#include <algorithm>
+#include <string>
+#include <cstring>
+using namespace std;
+// 15:07-15:11
+
+class ShoutterDiv2 {
+ public:
+  int count(vector<int> s, vector<int> t) {
+    int c = 0;
+    for (int i=0;i+1<s.size();i++)
+      for (int j=i+1;j<s.size();j++)
+        if (max(s[i],s[j]) <= min(t[i],t[j]))
+          ++c;
+    return c;
+  }
+};
+
+int idx = 0;
+
+void print_result(int expected, int received) {
+  if (expected == received)
+    cout << "TEST " << idx << " PASSED" << endl;
+  else {
+    cout << "TEST " << idx << " FAILED" << endl;
+    cout << "  expected: " << expected << endl;
+    cout << "  received: " << received << endl;
+  }
+  idx++;
+}
+
+int main() {
+  ShoutterDiv2 a;
+  vector<int> b;
+  vector<int> c;
+  b.push_back(1);
+  b.push_back(2);
+  b.push_back(4);
+  c.push_back(3);
+  c.push_back(4);
+  c.push_back(6);
+  print_result(2,a.count(b,c));
+  b.clear(); c.clear();
+  b.push_back(0);
+  c.push_back(100);
+  print_result(0,a.count(b,c));
+  b.clear(); c.clear();
+  b.push_back(9);
+  b.push_back(26);
+  b.push_back(8);
+  b.push_back(35);
+  b.push_back(3);
+  b.push_back(58);
+  b.push_back(91);
+  b.push_back(24);
+  b.push_back(10);
+  b.push_back(26);
+  b.push_back(22);
+  b.push_back(18);
+  b.push_back(15);
+  b.push_back(12);
+  b.push_back(15);
+  b.push_back(27);
+  b.push_back(15);
+  b.push_back(60);
+  b.push_back(76);
+  b.push_back(19);
+  b.push_back(12);
+  b.push_back(16);
+  b.push_back(37);
+  b.push_back(35);
+  b.push_back(25);
+  b.push_back(4);
+  b.push_back(22);
+  b.push_back(47);
+  b.push_back(65);
+  b.push_back(3);
+  b.push_back(2);
+  b.push_back(23);
+  b.push_back(26);
+  b.push_back(33);
+  b.push_back(7);
+  b.push_back(11);
+  b.push_back(34);
+  b.push_back(74);
+  b.push_back(67);
+  b.push_back(32);
+  b.push_back(15);
+  b.push_back(45);
+  b.push_back(20);
+  b.push_back(53);
+  b.push_back(60);
+  b.push_back(25);
+  b.push_back(74);
+  b.push_back(13);
+  b.push_back(44);
+  b.push_back(51);
+  c.push_back(26);
+  c.push_back(62);
+  c.push_back(80);
+  c.push_back(80);
+  c.push_back(52);
+  c.push_back(83);
+  c.push_back(100);
+  c.push_back(71);
+  c.push_back(20);
+  c.push_back(73);
+  c.push_back(23);
+  c.push_back(32);
+  c.push_back(80);
+  c.push_back(37);
+  c.push_back(34);
+  c.push_back(55);
+  c.push_back(51);
+  c.push_back(86);
+  c.push_back(97);
+  c.push_back(89);
+  c.push_back(17);
+  c.push_back(81);
+  c.push_back(74);
+  c.push_back(94);
+  c.push_back(79);
+  c.push_back(85);
+  c.push_back(77);
+  c.push_back(97);
+  c.push_back(87);
+  c.push_back(8);
+  c.push_back(70);
+  c.push_back(46);
+  c.push_back(58);
+  c.push_back(70);
+  c.push_back(97);
+  c.push_back(35);
+  c.push_back(80);
+  c.push_back(76);
+  c.push_back(82);
+  c.push_back(80);
+  c.push_back(19);
+  c.push_back(56);
+  c.push_back(65);
+  c.push_back(62);
+  c.push_back(80);
+  c.push_back(49);
+  c.push_back(79);
+  c.push_back(28);
+  c.push_back(75);
+  c.push_back(78);
+  print_result(830,a.count(b,c));
+}

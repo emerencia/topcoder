@@ -1,0 +1,68 @@
+#include <vector>
+#include <string>
+#include <queue>
+#include <utility>
+#include <set>
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+class ArcadeManao {
+ public:
+  int shortestLadder(vector<string> level, int coinRow, int coinColumn) {
+    coinRow--;
+    coinColumn--;
+    int n = level.size();
+    int m = level[0].size();
+    int target = coinRow*m+coinColumn;
+    for (int L=0;L<51;L++) {
+      vector<vector<bool> > g(n*m,vector<bool>(n*m,false));
+      for (int i=0;i<n;i++)
+        for (int j=0;j<m;j++) {
+          if (level[i][j] != 'X') continue;
+          for (int k=0;k<n;k++)
+            for (int l=0;l<m;l++) {
+              if (level[k][l] != 'X') continue;
+              g[i*m+j][k*m+l] = ((i == k && abs(j-l) <= 1) || (j == l && abs(i-k) <= L));
+            }
+        }
+      queue<int> q;
+      set<int> seen;
+      seen.insert((n-1)*m);
+      q.push((n-1)*m);
+      while (!q.empty()) {
+        int p = q.front();
+        q.pop();
+        if (p == target) return L;
+        for (int i = 0;i<g[p].size();i++) {
+          if (!g[p][i] || seen.count(i)) continue;
+          seen.insert(i);
+          q.push(i);
+        }
+      }
+    }
+    return -1;
+  }
+};
+
+int main () {
+  ArcadeManao a;
+  {
+  vector<string> b;
+  b.push_back("XXXX....");
+  b.push_back("...X.XXX");
+  b.push_back("XXX..X..");
+  b.push_back("......X.");
+  b.push_back("XXXXXXXX");
+  cout << "Expected: 2" << endl;
+  cout << "Received: " << a.shortestLadder(b,2,4) << endl;
+  }
+  {
+  vector<string> b;
+  b.push_back("XXXX");
+  b.push_back("...X");
+  b.push_back("XXXX");
+  cout << "Expected: 1" << endl;
+  cout << "Received: " << a.shortestLadder(b,1,1) << endl;
+  }
+}

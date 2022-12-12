@@ -1,0 +1,93 @@
+#include <string>
+#include <iostream>
+#include <sstream>
+#include <algorithm>
+#include <vector>
+#include <map>
+#include <set>
+#include <queue>
+#include <cmath>
+#include <utility>
+#include <climits>
+#include <cstring>
+using namespace std;
+
+const int kMod = 1000000009;
+typedef long long LL;
+long long dp[1001][2];
+
+class MegaFactorialDiv2 {
+ public:
+  void merge(vector<int>& r,vector<int>& a, long long exp) {
+    for (int i=0;i<a.size();i++)
+      r[i] = (r[i]+(exp*a[i])%kMod)%kMod;
+  }
+  int countDivs(vector<int>& a) {
+    long long r = 1;
+    for (int i=0;i<a.size();i++) {
+      int t = (a[i] + 1)%kMod;
+      r = (r*t)%kMod;
+    }
+    return r;
+  }
+  int countDivisors(int N, int K) {
+    vector<int> primes;
+    for (int i=2;i<=N;i++) {
+      bool ok = true;
+      for (int j=0;j<primes.size();j++)
+        if (i%primes[j] == 0) {
+          ok = false;
+          break;
+        }
+      if (ok) primes.push_back(i);
+    }
+    vector<vector<int> > dp2(1001,vector<int>(primes.size(),0));
+    for (int k=2;k<=N;k++) {
+      int kk = k;
+      for (int i=0;i<primes.size();i++) {
+        if (primes[i] > kk) break;
+        while (kk%primes[i] == 0) {
+          dp2[k][i] = (dp2[k][i]+1)%kMod;
+          kk/=primes[i];
+        }
+      }
+    }
+    vector<int>r (primes.size(),0);
+    memset(dp,0,sizeof(dp));
+    for (int k=0;k<2;k++)
+      dp[0][k] = 1;
+    for (int k=1;k<=K;k++)
+      for (int n=1;n<1001;n++)
+        dp[n][k%2] = (dp[n-1][k%2]+dp[n][(k+1)%2])%kMod;
+    long long exp = dp[0][K%2];
+    int i = 0;
+    for (int n=N;n>1;n--) {
+      merge(r,dp2[n],exp);
+      exp=dp[++i][K%2];
+    }
+    return countDivs(r);
+  }
+  
+// BEGIN CUT HERE
+	public:
+	void run_test(int Case) { if ((Case == -1) || (Case == 0)) test_case_0(); if ((Case == -1) || (Case == 1)) test_case_1(); if ((Case == -1) || (Case == 2)) test_case_2(); if ((Case == -1) || (Case == 3)) test_case_3(); if ((Case == -1) || (Case == 4)) test_case_4(); if ((Case == -1) || (Case == 5)) test_case_5(); if ((Case == -1) || (Case == 6)) test_case_6(); }
+	private:
+	template <typename T> string print_array(const vector<T> &V) { ostringstream os; os << "{ "; for (typename vector<T>::const_iterator iter = V.begin(); iter != V.end(); ++iter) os << '\"' << *iter << "\","; os << " }"; return os.str(); }
+	void verify_case(int Case, const int &Expected, const int &Received) { cerr << "Test Case #" << Case << "..."; if (Expected == Received) cerr << "PASSED" << endl; else { cerr << "FAILED" << endl; cerr << "\tExpected: \"" << Expected << '\"' << endl; cerr << "\tReceived: \"" << Received << '\"' << endl; } }
+	void test_case_0() { int Arg0 = 3; int Arg1 = 1; int Arg2 = 4; verify_case(0, Arg2, countDivisors(Arg0, Arg1)); }
+	void test_case_1() { int Arg0 = 3; int Arg1 = 2; int Arg2 = 6; verify_case(1, Arg2, countDivisors(Arg0, Arg1)); }
+	void test_case_2() { int Arg0 = 4; int Arg1 = 2; int Arg2 = 18; verify_case(2, Arg2, countDivisors(Arg0, Arg1)); }
+	void test_case_3() { int Arg0 = 6; int Arg1 = 3; int Arg2 = 1392; verify_case(3, Arg2, countDivisors(Arg0, Arg1)); }
+	void test_case_4() { int Arg0 = 100; int Arg1 = 2; int Arg2 = 321266186; verify_case(4, Arg2, countDivisors(Arg0, Arg1)); }
+  void test_case_5() { int Arg0 = 77; int Arg1 = 11; int Arg2 = 61095262; verify_case(5, Arg2, countDivisors(Arg0, Arg1)); }
+  void test_case_6() { int Arg0 = 1000; int Arg1 = 100; int Arg2 = 563680238; verify_case(6, Arg2, countDivisors(Arg0, Arg1)); }
+
+// END CUT HERE
+
+};
+// BEGIN CUT HERE
+int main() {
+  MegaFactorialDiv2 ___test;
+  ___test.run_test(-1);
+}
+// END CUT HERE

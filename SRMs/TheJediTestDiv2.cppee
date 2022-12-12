@@ -1,0 +1,21 @@
+#include <vector>
+using namespace std;
+
+class TheJediTestDiv2 {
+  public:
+  int countSupervisors(vector<int> students,int y, int j) {
+    int mn=10000000;
+    for (int i=0;i<students.size();i++) {
+      int c = 0;
+      if (students[i] > y) {
+        c+=((students[i]-y)/j)+((students[i]-y)%j == 0 ? 0 : 1);
+      }
+      for (int k=0;k<students.size();k++) {
+        if (i==k) continue;
+        c+=(students[k]/j)+(students[k]%j == 0 ? 0 : 1);
+      }
+      mn = min(mn,c);
+    }
+    return mn;
+  }
+};

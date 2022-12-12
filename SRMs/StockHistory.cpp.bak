@@ -1,0 +1,101 @@
+// BEGIN CUT HERE
+// PROBLEM STATEMENT
+// You have recently been given a one-time bonus at work, along with a pay raise.  In the interest of putting your new found money to good use, you have decided to invest in the stock market.  To learn about recent market history, you have acquired historical data on several stocks you might be interested in purchasing.
+
+For experiment's sake, you want to evaluate the potential performance of your selected stocks.  What you are wondering is how much money you could have made if, at the beginning, you had an initial investment of int initialInvestment dollars, and each month thereafter you had an additional int monthlyContribution dollars.  Assume that you may buy any number of shares of stocks at the beginning of each month (including fractional numbers of shares), and that at the end of the timeframe (at the beginning of the last month) represented in the data, you sell all of your holdings.  You may not sell stocks in the intermediate period.  (See examples for clarification.)
+
+You are given a vector <string>, stockPrices, in which each element lists the prices
+of each stock at the beginning of a month.  Each element of stockPrices is in the form "stock0 stock1 ..." (quotes added for clarity), where each stocki is a positive integer with no leading zeroes.  The first element of stockPrices gives the initial prices, the second element gives the prices at the beginning of the first month after you start investing, and so on.
+
+You are to return an int indicating the maximum earnings (profit) you could make by the end of the timeframe.  You should round your result to the nearest integer.
+
+
+
+
+
+
+DEFINITION
+Class:StockHistory
+Method:maximumEarnings
+Parameters:int, int, vector <string>
+Returns:int
+Method signature:int maximumEarnings(int initialInvestment, int monthlyContribution, vector <string> stockPrices)
+
+
+CONSTRAINTS
+-initialInvestment will be between 0 and 10000, inclusive.
+-monthlyContributon will be between 0 and 1000, inclusive.
+-stockPrices will contain between 2 and 50 elements, inclusive.
+-Each element of stockPrices will contain between 1 and 50 characters, inclusive.
+-Each element of stockPrices will be formatted as a space delimited list of positive integers.
+-Each integer represented in an element of stockPrices will be between 1 and 999, inclusive.
+-Each element of stockPrices will represent the same number of integers.
+-The result prior to rounding will not be within 0.01 of x.5, where x is an integer.
+
+
+EXAMPLES
+
+0)
+1000
+0
+{"10 20 30", "15 24 32"}
+
+Returns: 500
+
+Clearly the first stock is a bigger gain than either of the others.  We go all in on it.
+
+1)
+1000
+0
+{"10", "9"}
+
+Returns: 0
+
+We're best off not buying any shares, rather than buying and losing money.
+
+2)
+100
+20
+{"40 50 60",
+ "37 48 55",
+ "100 48 50",
+ "105 48 47",
+ "110 50 52",
+ "110 50 52",
+ "110 51 54",
+ "109 49 53"}
+
+Returns: 239
+
+Remember that we can't sell any shares until the beginning of the last month.  So, let's work backwards, and figure out what the best way to invest our money is.  During the second to last month (month 6), the stock prices are 110, 51 and 54, all higher than the prices that we would sell at, so we don't buy anything during that month.
+At the beginning of month 5, the price of the third stock is a little lower than its final price, so we invest our 20 in that, and make a meager 20*((53/52)-1).  The prices are the same at the beginning of month 4, so we do the same thing.
+At the beginning of month 3, the prices have changed, but it is still best to invest in the third stock.  Note that the profit we make investing in the third stock during month 3 is larger than it is if we save our money and invest later.  Hence, we make a profit of 20*((53/47)-1) on our 20 from month 3.
+At the beginning of month 2, it is best to save all of our money, and then invest in the third stock during the next month when the price is lower.  At the beginning of month 1, you should clearly invest in the first stock.  You should save all of your money from the initial investment until the price of the first stock goes down a little.  So, to summarize:
+
+month | action
+------+-------
+    0 | save
+    1 | buy stock 0 (120/37 shares)
+    2 | save
+    3 | buy stock 2 (40/47 shares)
+    4 | buy stock 2 (20/52 shares)
+    5 | buy stock 2 (20/52 shares)
+    6 | save
+    7 | sell (3.243 shares of stock 0, 1.620 shares of stock 2)
+Total sales price : 439.389
+Total investment  : 200
+Profit            : 239.389
+
+
+Notice that you always either invest all of your money at the beginning of a month, or else save all of it.  When you know the future prices, there is no reason to invest only some of your money.
+
+// END CUT HERE
+#line 94 "StockHistory.cpp"
+#include <string>
+#include <vector>
+class StockHistory {
+	public:
+	int maximumEarnings(int initialInvestment, int monthlyContribution, vector <string> stockPrices) {
+		
+	}
+};

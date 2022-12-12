@@ -1,0 +1,99 @@
+// BEGIN CUT HERE
+// PROBLEM STATEMENT
+// A famous probabilistic primality test makes use of Fermat's Little Theorem from number theory.  The theorem states 
+
+         p-1
+	b     %   p  =  1
+
+for all primes p, with b satisfying 1 < b < p, and % denoting modulus or remainder.  To refresh your memory, a prime is an integer greater than 1 whose only factors are 1 and itself.  In order to test some potential prime q we do the following: 
+
+Choose some b-value and compute b^(q-1) % q.  
+If this value is not 1 then you know q is not prime. 
+If this value is 1, then you are more sure q is prime than before.
+
+Given q you will try each b-value beginning with 2 until you reach q-1.  If at least one of the b-values fails the test stated above (do not produce 1) then return the lowest failing b-value.  If all pass return q.
+
+When computing b^(q-1) % q the numbers can get enormous unless certain measures are taken.  For one thing, after each multiplication you can apply the modulus.  For example, 
+	190^11 % 300  =  ((190^5 % 300) * (190^6 % 300)) % 300  .
+
+In addition, repeated squaring can speed up the exponentiation process.  For example, 
+	a^9 = a*a*a*a*a*a*a*a*a      requires 8 multiplications but
+        a^9 = a*((a^2)^2)^2          requires 4 multiplications.
+
+We can combine the two methods above as illustrated in the following example where we compute a^11 % 12: 
+	a^11 % 12 = (a * (a^10 % 12)) % 12 
+        a^10 % 12 = (a^5 % 12)^2 % 12 
+        a^5  % 12 = (a * (a^4 % 12)) % 12 
+        a^4  % 12 = (a^2 % 12)^2 % 12 
+	a^2  % 12 = (a*a) % 12  
+
+
+
+DEFINITION
+Class:PseudoPrimeTest
+Method:firstFail
+Parameters:int
+Returns:int
+Method signature:int firstFail(int q)
+
+
+CONSTRAINTS
+-q will be between 3 and 32000 inclusive.
+
+
+EXAMPLES
+
+0)
+3
+
+Returns: 3
+
+Since 2^2 % 3 = 4 % 3 = 1 simply return 3.
+
+   
+
+1)
+1729
+
+Returns: 7
+
+Here we have 
+   2^1728 % 1729 = 1
+   3^1728 % 1729 = 1
+   4^1728 % 1729 = 1
+   5^1728 % 1729 = 1
+   6^1728 % 1729 = 1
+   7^1728 % 1729 = 742
+ so 7 is returned.
+   
+
+2)
+561
+
+Returns: 3
+
+3)
+7
+
+Returns: 7
+
+4)
+341
+
+Returns: 3
+
+5)
+31859
+
+Returns: 31859
+
+// END CUT HERE
+#line 92 "PseudoPrimeTest.cpp"
+#include <string>
+#include <vector>
+class PseudoPrimeTest {
+	public:
+	int firstFail(int q) {
+		
+	}
+};

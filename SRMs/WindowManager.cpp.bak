@@ -1,0 +1,87 @@
+// BEGIN CUT HERE
+// PROBLEM STATEMENT
+// You are debugging a window manager for a GUI that uses a fixed character size, and a screen that is a rectangular grid of these characters.  To that end, you are making it create various overlapping windows to test whether the display code works correctly.
+
+The screen has width width and height height.  Initially, each character in the screen is a space (' ', or ASCII value 32).  The elements of windows represent the windows that you are creating, in order of their creation, where the earliest-created windows come first in windows.  A window consists of a frame and a fill character, shown below:
+
+
++----+
+|XXXX|
+|XXXX|
++----+
+
+
+The corners of the frame are '+', the top and bottom are '-', the left and right are '|', and the interior of the window is filled with some character (here 'X').  Each element in windows will be of the form "tlv tlh vs hs fill", where each field is separated by a single space.  tlv and tlh will be 32-bit integers between -100000000 and 100000000, inclusive, representing the vertical and horizontal offsets from the top-left of the screen.  A positive vertical offset is downwards, and a positive horizontal offset is to the right.  vs and hs represent the vertical and horizontal size of the window, and will each be between 2 and 100000000, inclusive.  fill represents the character that will go in the center of the window.  Note that if vs, hs, or both are equal to 2, then the fill character does not appear because the frame takes up all the allotted space for the window.  If the picture drawn earlier represented the entirety of the screen, then the window shown would be represented by the string "0 0 4 6 X" (quotes for clarity).
+
+If one window is created that would intersect another window, the later window will appear over the earlier window.  That is, any part of the earlier-created window that intersects a later-created window is hidden.  Windows may also be drawn partially or completely off-screen.
+
+You wish to find what the window manager should show given some sequence of windows.  Your method should return a vector <string> such that the first element, from left to right, represents the first row of the screen, the second element is the second row, and so on.  This returned vector <string> should contain exactly height elements, and each element should contain exactly width characters.
+
+DEFINITION
+Class:WindowManager
+Method:screen
+Parameters:int, int, vector <string>
+Returns:vector <string>
+Method signature:vector <string> screen(int height, int width, vector <string> windows)
+
+
+CONSTRAINTS
+-width will be between 1 and 100, inclusive
+-height will be between 1 and 100, inclusive
+-width * height will not exceed 8000.
+-windows will contain between 1 and 50 elements, inclusive
+-each element of windows will be of the form "tlv tlh vs hs fill" as explained in the problem statement
+-tlv and tlh will be between -100000000 and 100000000, inclusive, with no leading zeros.
+-vs and hs will be between 2 and 100000000, inclusive, with no leading zeros.
+-fill will be an ASCII character with value between 33 and 126, inclusive, that is also not '+', '-', or '|'
+
+
+EXAMPLES
+
+0)
+4
+6
+{"-5 -5 20 20 O", "0 0 2 2 Y", "0 0 4 6 X"}
+
+Returns: { "+----+",  "|XXXX|",  "|XXXX|",  "+----+" }
+
++----+
+|XXXX|
+|XXXX|
++----+
+
+A full-screen window completely covering up two others.
+
+1)
+7
+7
+{"-5 -5 20 12 9", "2 2 15 15 @", "2 2 3 3 *"}
+
+Returns: { "999999|",  "999999|",  "99+-+--",  "99|*|@@",  "99+-+@@",  "99|@@@@",  "99|@@@@" }
+
+2)
+1
+1
+{"-20000 -20000 5 5 X"}
+
+Returns: { " " }
+
+Note two things: windows may be completely off-screen, and the default character for any grid location is a space.
+
+3)
+5
+5
+{"-1000000 -1000000 2000000 2000000 L"}
+
+Returns: { "LLLLL",  "LLLLL",  "LLLLL",  "LLLLL",  "LLLLL" }
+
+// END CUT HERE
+#line 80 "WindowManager.cpp"
+#include <string>
+#include <vector>
+class WindowManager {
+	public:
+	vector <string> screen(int height, int width, vector <string> windows) {
+		
+	}
+};

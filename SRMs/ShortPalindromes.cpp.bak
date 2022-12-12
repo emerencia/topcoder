@@ -1,0 +1,112 @@
+#include <string>
+#include <climits>
+#include <algorithm>
+#include <vector>
+#include <iostream>
+using namespace std;
+
+int dp[27][27];
+
+class ShortPalindromes {
+ public:
+  string shortest(string base) {
+    vector<vector<string> > pd(27,vector<string>(27));
+    fill(&dp[0][0],&dp[27][0],INT_MAX);
+    for (int i=0;i<27;i++) {
+      dp[i][0] = 0;
+      pd[i][0] = "";
+      dp[i][1] = 0;
+      pd[i][1] = string(1,base[i]);
+    }
+    int n = base.size();
+    for (int m=2;m<=n;m++)
+      for (int l=0;l+m<=n;l++)
+        if (base[l] == base[l+m-1]) {
+          dp[l][m] = dp[l+1][m-2];
+          pd[l][m] = base[l]+pd[l+1][m-2]+base[l+m-1];
+        } else {
+          dp[l][m] = 1+min(dp[l][m-1],dp[l+1][m-1]);
+          if (dp[l][m-1] == dp[l+1][m-1]) {
+            pd[l][m] = min(base[l+m-1]+pd[l][m-1]+base[l+m-1],
+                           base[l]+pd[l+1][m-1]+base[l]);
+          } else if (dp[l+1][m-1] > dp[l][m-1]) {
+            pd[l][m] = base[l+m-1]+pd[l][m-1]+base[l+m-1];
+          } else {
+            pd[l][m] = base[l]+pd[l+1][m-1]+base[l];
+          }
+        }
+    return pd[0][n];
+  }
+};
+
+int main() {
+  ShortPalindromes a;
+  vector<string> b;
+  vector<string> r;
+  b.push_back("RACE"); r.push_back("ECARACE");
+b.push_back("TOPCODER"); r.push_back("REDTOCPCOTDER");
+b.push_back("Q"); r.push_back("Q");
+b.push_back("MADAMIMADAM"); r.push_back("MADAMIMADAM");
+b.push_back("ALRCAGOEUAOEURGCOEUOOIGFA"); r.push_back("AFLRCAGIOEOUAEOCEGRURGECOEAUOEOIGACRLFA");
+b.push_back("ABCDEFG"); r.push_back("ABCDEFGFEDCBA");
+b.push_back("GFEDCBA"); r.push_back("ABCDEFGFEDCBA");
+b.push_back("AAAAA"); r.push_back("AAAAA");
+b.push_back("AAAAAB"); r.push_back("BAAAAAB");
+b.push_back("ABBBBB"); r.push_back("ABBBBBA");
+b.push_back("GECABDF"); r.push_back("FDBACEGECABDF");
+b.push_back("ACEGFDB"); r.push_back("ABCDEFGFEDCBA");
+b.push_back("ABCDAA"); r.push_back("AABCDCBAA");
+b.push_back("CA"); r.push_back("ACA");
+b.push_back("EDD"); r.push_back("EDDE");
+b.push_back("BEDA"); r.push_back("ABDEDBA");
+b.push_back("BEABB"); r.push_back("BBAEABB");
+b.push_back("DEABCB"); r.push_back("DEABCBAED");
+b.push_back("AECEABA"); r.push_back("ABAECEABA");
+b.push_back("EEDBDEDA"); r.push_back("ADEEDBDEEDA");
+b.push_back("ACBAAADCC"); r.push_back("ACBCDAAADCBCA");
+b.push_back("ACCCCCCBDA"); r.push_back("ADBCCCCCCBDA");
+b.push_back("ACDBABDCCDB"); r.push_back("ABDCCDBABDCCDBA");
+b.push_back("BDDAABCAEAAB"); r.push_back("BADDAEABCBAEADDAB");
+b.push_back("BBCADBCEBBECD"); r.push_back("BBCADBCEBBECBDACBB");
+b.push_back("BCCAADEBCEEBAA"); r.push_back("BCCAADEBCEECBEDAACCB");
+b.push_back("EDCCCECEBACDEBD"); r.push_back("DBEDCABCCECECCBACDEBD");
+b.push_back("CECCDBBBBDBDBCBB"); r.push_back("BBCBECCDBDBBBDBDCCEBCBB");
+b.push_back("BBEDBAEEDEACEDDAC"); r.push_back("BBCADDECDBAEDEDEABDCEDDACBB");
+b.push_back("AEABEDBDBBADEECEDC"); r.push_back("ACDEABCEEDABBDBBADEECBAEDCA");
+b.push_back("AABEDDEBBDBCECDCADD"); r.push_back("AABDEDACDCEBCBDBCBECDCADEDBAA");
+b.push_back("ACCADCCDCDDBBEDACBCB"); r.push_back("ABCBCADCCEBBDCDCDBBECCDACBCBA");
+b.push_back("BEAEDAADADDDDBDDCCABD"); r.push_back("DBEACCEDAADABDDDDBADAADECCAEBD");
+b.push_back("AEEECABCBEAEBBCCACDAEC"); r.push_back("ACEADEECABCCBBEAEBBCCBACEEDAECA");
+b.push_back("AEADACEBABCCBDBAEDCCCBC"); r.push_back("ACBCCCDEABDABCCEBABECCBADBAEDCCCBCA");
+b.push_back("AADEDEBECDCDEBCCECCEACCC"); r.push_back("ACCCADECCDECCBECDCDCEBCCEDCCEDACCCA");
+b.push_back("CBDDECBEDCEBEEEAEBCCAEEAE"); r.push_back("CBDDEACBEDCEACCBEAEEAEBCCAECDEBCAEDDBC");
+b.push_back("HMDCDJKWHWMEDBKWJEKRFHLO"); r.push_back("OLHFMDCDRKEJWKBDEMWHWMEDBKWJEKRDCDMFHLO");
+b.push_back("MWRQIGJTGNKPBHKXQGIIECSF"); r.push_back("FMSCEIWRQIGJQTGNXKHBPBHKXNGTQJGIQRWIECSMF");
+b.push_back("PXVXFOVOXFXUNVKQSVBLTGNL"); r.push_back("LNGPTLBVSQKXVNUXFXOVOXFXUNVXKQSVBLTPGNL");
+b.push_back("QTQDDSEJHKMAVPVVRSITDMMM"); r.push_back("MMMDQTIQDDSEJHKMARVPVPVRAMKHJESDDQITQDMMM");
+b.push_back("UZOUZENQJTNWLRNBTABSNHHZA"); r.push_back("AUZHHOUZENQJSBATBNRLWLRNBTABSJQNEZUOHHZUA");
+b.push_back("EOFYITMBCPSKYNAIBHGVIGFBT"); r.push_back("EOFYITMBCFGPSKYNAIBHGVGHBIANYKSPGFCBMTIYFOE");
+b.push_back("LVJYMTWWFPUAJGFAENQAITSUW"); r.push_back("LVJYMTWWFPUAJGFSTIAENQNEAITSFGJAUPFWWTMYJVL");
+b.push_back("ZNRDGCMXQCSHEIRSONFBOZDFQ"); r.push_back("QFDZOBFNOSRDGIEHSCMQXQMCSHEIGDRSONFBOZDFQ");
+b.push_back("ALRCAGOEUAOERGCOEUOOIGFA"); r.push_back("AFLRCAGIOEOUAEOCEGRGECOEAUOEOIGACRLFA");
+b.push_back("ALRCAGOEUAOEURGCOEUOOIGFA"); r.push_back("AFLRCAGIOEOUAEOCEGRURGECOEAUOEOIGACRLFA");
+b.push_back("ALRCAGOEUAOEXXGCOEUOOIGFA"); r.push_back("AFLRCAGIOEOUAEOCEGXXGECOEAUOEOIGACRLFA");
+b.push_back("ALRCAGOEUAOEXXXCOEUOOIGFA"); r.push_back("AFLRCAGIOEOUAEOCEXXXECOEAUOEOIGACRLFA");
+b.push_back("ABACADAFAGAFAHAJAKABA"); r.push_back("ABACKADJAHAFAGAFAHAJDAKCABA");
+b.push_back("ABACADAEAFAGAHAIAJAKAL"); r.push_back("ABLACKADJAEIAFHAGAHFAIEAJDAKCALBA");
+b.push_back("SDGBIULGIBNEROJOPGERG"); r.push_back("GRESDGPOJORENBIGLULGIBNEROJOPGDSERG");
+b.push_back("TOPCODER"); r.push_back("REDTOCPCOTDER");
+b.push_back("GOOGLE"); r.push_back("ELGOOGLE");
+  
+  for (int i=0;i<b.size();i++) {
+    string expected = r[i];
+    string received = a.shortest(b[i]);
+    if (received == expected)
+      cout << "Test " << i << " PASSED" << endl;
+    else {
+      cout << "Test " << i << " FAILED" << endl;
+      cout << "  Expected: " << expected << endl;
+      cout << "  Received: " << received << endl;
+    }
+  }
+}
